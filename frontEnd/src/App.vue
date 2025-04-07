@@ -1,46 +1,38 @@
-<script setup>
-
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <div class="app">
+    <nav class="navbar">
+      <router-link to="/profile/create" class="nav-link">Create Profile</router-link>
+      <router-link to="/profile/1" class="nav-link">View Example Profile</router-link>
+    </nav>
+    <router-view></router-view>
+  </div>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
+<style>
+/* Global styles (not scoped) */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa;
+  color: #333;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+.navbar {
+  background: #4d1979;
+  padding: 1rem 2rem;
+  display: flex;
+  gap: 1.5rem;
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
 
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+.nav-link.router-link-active {
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 </style>
