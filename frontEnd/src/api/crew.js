@@ -1,5 +1,7 @@
+import { ref } from 'vue';
+
 // Mock database
-const mockCrewDB = [
+const mockCrewDB = ref([  // Make it reactive with ref()
   {
     id: '1',
     firstName: 'Test',
@@ -9,18 +11,25 @@ const mockCrewDB = [
     role: 'PRODUCER',
     positions: ['DIRECTOR']
   }
-];
+]);
 
-//Named exports
 export const createCrewMember = async (data) => {
   return new Promise((resolve) => {
     setTimeout(() => {
       const newMember = {
-        id: String(mockCrewDB.length + 1),
+        id: String(mockCrewDB.value.length + 1),
         ...data
       };
-      mockCrewDB.push(newMember);
+      mockCrewDB.value.push(newMember);
       resolve({ data: newMember });
+    }, 500);
+  });
+};
+
+export const getAllCrewMembers = async () => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve({ data: mockCrewDB.value });
     }, 500);
   });
 };
@@ -28,7 +37,8 @@ export const createCrewMember = async (data) => {
 export const getCrewMember = async (userId) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      const member = mockCrewDB.find(m => m.id === userId);
+      //Access .value to get the array
+      const member = mockCrewDB.value.find(m => m.id === userId);
       if (member) {
         resolve({ data: member });
       } else {
