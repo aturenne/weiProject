@@ -1,7 +1,7 @@
-package UserDto;
-
+package edu.tcu.cs.backend.UserDto;
 
 public class UserDto {
+
     private int id;
 
     private String firstName;
