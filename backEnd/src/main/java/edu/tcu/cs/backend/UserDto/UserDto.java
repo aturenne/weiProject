@@ -1,8 +1,10 @@
 package edu.tcu.cs.backend.UserDto;
 
+import java.net.Inet4Address;
+
 public class UserDto {
 
-    private int id;
+    private Integer id;
 
     private String firstName;
 
