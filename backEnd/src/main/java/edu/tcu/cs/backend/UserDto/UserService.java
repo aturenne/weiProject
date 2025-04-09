@@ -14,6 +14,6 @@ public class UserService {
     }
 
     public UserDto findUserById(int userId) {
-        return null;
+        return this.userRepository.findById(userId).get();
     }
 }
