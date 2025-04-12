@@ -10,7 +10,7 @@ const routes = [
         path: 'create',
         name: 'CreateProfile',
         component: () => import('@/components/ProfileForm.vue'),
-        meta: { title: 'Create Profile' }
+        meta: { title: 'Create Profile', requiresAuth: false } //will define requiresAuth later
       },
       {
         path: ':id',
@@ -27,6 +27,11 @@ const routes = [
     component: () => import('@/views/ProfilesView.vue'),
     meta: { title: 'All Profiles' }
   },
+  {
+    path: '/availability',
+    component: () => import('@/views/AvailabilityView.vue')
+  },
+  //Fallback
   {
     path: '/:pathMatch(.*)*',
     redirect: '/profile/create'
