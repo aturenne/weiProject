@@ -2,19 +2,17 @@ package edu.tcu.cs.backend.UserDto;
 
 import java.util.Optional;
 
-import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -57,7 +55,16 @@ class UserServiceTest {
         assertThat(returnedUser.getLastName()).isEqualTo(user1.getLastName());
         assertThat(returnedUser.getEmail()).isEqualTo(user1.getEmail());
         verify(userRepository, times(1)).findById(1);
-        
+    }
+    @Test
+    void testFindUserByIdNotFound() {
+        given(userRepository.findById(Mockito.anyInt())).willReturn(Optional.empty());
+
+        Throwable thrown = catchThrowable(() -> userService.findUserById(1));
+
+        assertThat(thrown).isInstanceOf(UserNotFoundException.class)
+                .hasMessageContaining("User not found");
+        verify(userRepository, times(1)).findById(1);
 
     }
 }

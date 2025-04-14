@@ -1,9 +1,11 @@
 package edu.tcu.cs.backend.UserDto;
+import edu.tcu.cs.backend.System.Result;
 
+import edu.tcu.cs.backend.System.StatusCode;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-import javax.xml.transform.Result;
+
 
 @RestController
 public class UserController {
@@ -16,7 +18,9 @@ public class UserController {
 
     @GetMapping("/crewMember/{userId}")
     public Result findUserById(@PathVariable int userId) {
-        return null;
+        UserDto foundUser = this.userService.findUserById(userId);
+        return new Result(true, StatusCode.SUCCESS, "Find Success", foundUser) {
+        };
     }
 
 
