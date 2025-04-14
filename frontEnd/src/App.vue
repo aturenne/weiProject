@@ -4,6 +4,7 @@
       <router-link to="/profile/create" class="nav-link">Create Profile</router-link>
       <router-link to="/profiles" class="nav-link">View Profiles</router-link>
       <router-link to="/availability" class="nav-link">Availability</router-link>
+      <router-link to="/admin" class="nav-link">Admin Portal</router-link>
     </nav>
     <router-view></router-view>
   </div>
