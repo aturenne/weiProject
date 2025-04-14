@@ -18,13 +18,13 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
-class UserServiceTest {
+class crewMemberServiceTest {
 
     @Mock
-    UserRepository userRepository;
+    crewMemberRepository userRepository;
 
     @InjectMocks
-    UserService userService;
+    crewMemberService userService;
 
 
 
@@ -39,7 +39,7 @@ class UserServiceTest {
     @Test
     void findUserById() {
         //Given. Arrange inputs and Targets. Define the behavior of Mock Object
-        UserDto user1 = new UserDto();
+        crewMember user1 = new crewMember();
         user1.setId(1);
         user1.setFirstName("John");
         user1.setLastName("Doe");
@@ -47,7 +47,7 @@ class UserServiceTest {
 
         given(userRepository.findById(1)).willReturn(Optional.of(user1));
         //When. Call the method under test
-        UserDto returnedUser = userService.findUserById(1);
+        crewMember returnedUser = userService.findUserById(1);
 
         //Then. Verify the result
         assertThat(returnedUser.getId()).isEqualTo(user1.getId());
@@ -62,7 +62,7 @@ class UserServiceTest {
 
         Throwable thrown = catchThrowable(() -> userService.findUserById(1));
 
-        assertThat(thrown).isInstanceOf(UserNotFoundException.class)
+        assertThat(thrown).isInstanceOf(crewMemberNotFoundException.class)
                 .hasMessageContaining("User not found");
         verify(userRepository, times(1)).findById(1);
 

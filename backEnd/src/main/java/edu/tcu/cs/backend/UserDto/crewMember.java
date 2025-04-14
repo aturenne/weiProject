@@ -1,9 +1,16 @@
 package edu.tcu.cs.backend.UserDto;
 
-import java.net.Inet4Address;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
-public class UserDto {
+import java.io.Serializable;
+import java.util.List;
 
+@Entity
+public class crewMember  implements Serializable {
+
+    @Id
     private Integer id;
 
     private String firstName;
@@ -16,9 +23,10 @@ public class UserDto {
 
     private String role;
 
-    private String[] positions;
+    @ElementCollection
+    private List<String> positions;
 
-    public UserDto() {
+    public crewMember() {
     }
 
     public int getId() {
@@ -69,11 +77,11 @@ public class UserDto {
         this.role = role;
     }
 
-    public String[] getPositions() {
+    public List<String> getPositions() {
         return positions;
     }
 
-    public void setPositions(String[] positions) {
+    public void setPositions(List<String> positions) {
         this.positions = positions;
     }
 }

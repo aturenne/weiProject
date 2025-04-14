@@ -1,7 +1,7 @@
 package edu.tcu.cs.backend.UserDto;
 
-public class UserNotFoundException extends RuntimeException {
-    public UserNotFoundException(int userId) {
+public class crewMemberNotFoundException extends RuntimeException {
+    public crewMemberNotFoundException(int userId) {
         super("Could not find user " + userId);
 
     }
