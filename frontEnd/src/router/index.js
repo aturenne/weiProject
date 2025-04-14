@@ -9,13 +9,13 @@ const routes = [
         path: 'create',
         name: 'CreateProfile',
         component: () => import('@/components/ProfileForm.vue'),
-        meta: { title: 'Create Profile', requiresAuth: false } //will define requiresAuth later in before each
+        meta: { title: 'Create Profile', requiresAuth: false, requiresAdmin: false } //will define requiresAuth later in before each
       },
       {
         path: ':id',
         name: 'ViewProfile',
         component: () => import('@/components/ProfileDisplay.vue'),
-        meta: { title: 'Profile Details', requiresAuth: true },
+        meta: { title: 'Profile Details', requiresAuth: true, requiresAdmin: false },
         props: true
       }
     ]
@@ -24,12 +24,12 @@ const routes = [
     path: '/profiles',
     name: 'ProfilesList',
     component: () => import('@/views/ProfilesView.vue'),
-    meta: { title: 'All Profiles', requiresAuth: true }
+    meta: { title: 'All Profiles', requiresAuth: true, requiresAdmin: false },
   },
   {
     path: '/availability',
     component: () => import('@/views/AvailabilityView.vue'),
-    meta: { title: 'Availability', requiresAuth: true },
+    meta: { title: 'Availability', requiresAuth: true, requiresAdmin: false },
   },
   //Fallback
   {
