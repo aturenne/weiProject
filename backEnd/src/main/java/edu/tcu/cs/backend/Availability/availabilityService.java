@@ -1,5 +1,6 @@
 package edu.tcu.cs.backend.Availability;
 
+import edu.tcu.cs.backend.System.Exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,6 @@ public class availabilityService {
 
     public availability getAvailabilityByUserIdAndScheduleId(int userId, int scheduleId) {
         return availabilityRepository.findByUserIdAndGameId(userId, scheduleId)
-                .orElseThrow(() -> new availabilityNotFoundException(userId, scheduleId));
+                .orElseThrow(() -> new ObjectNotFoundException("Availability", "userId=" + userId + ", scheduleId=" + scheduleId));
     }
 }
