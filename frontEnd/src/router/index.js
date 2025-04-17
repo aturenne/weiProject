@@ -31,11 +31,6 @@ const routes = [
     component: () => import('@/views/AvailabilityView.vue'),
     meta: { title: 'Availability', requiresAuth: true, requiresAdmin: false },
   },
-  //Fallback
-  {
-    path: '/:pathMatch(.*)*',
-    redirect: '/profile/create'
-  },
   {
   path: '/admin',
   component: () => import('@/views/AdminView.vue'),
@@ -52,7 +47,20 @@ const routes = [
       props: (route) => ({ userId: Number(route.params.userId) })
     }
   ]
-}
+},
+{
+  path: '/scheduling',
+  component: () => import('@/views/SchedulingView.vue'),
+  meta: { 
+    title: 'Scheduling',
+    requiresAuth: true
+  }
+},
+//Fallback
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: '/profile/create'
+  },
 ];
 
 const router = createRouter({

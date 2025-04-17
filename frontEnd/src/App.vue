@@ -5,6 +5,7 @@
       <router-link to="/profiles" class="nav-link">View Profiles</router-link>
       <router-link to="/availability" class="nav-link">Availability</router-link>
       <router-link to="/admin" class="nav-link">Admin Portal</router-link>
+      <router-link to="/scheduling" class="nav-link">Scheduling</router-link>
     </nav>
     <router-view></router-view>
   </div>
