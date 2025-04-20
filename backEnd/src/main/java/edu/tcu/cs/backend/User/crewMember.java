@@ -1,4 +1,4 @@
-package edu.tcu.cs.backend.UserDto;
+package edu.tcu.cs.backend.User;
 
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;

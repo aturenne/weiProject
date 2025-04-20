@@ -1,7 +1,15 @@
 package edu.tcu.cs.backend.gameSchedule;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Column;
+
+@Entity
 public class gameSchedule {
 
+    @Id
     private int gameId;
 
     private int scheduleId;

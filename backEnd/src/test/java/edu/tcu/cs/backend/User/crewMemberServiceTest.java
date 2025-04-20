@@ -1,4 +1,4 @@
-package edu.tcu.cs.backend.UserDto;
+package edu.tcu.cs.backend.User;
 
 import java.util.Optional;
 
@@ -63,7 +63,7 @@ class crewMemberServiceTest {
         Throwable thrown = catchThrowable(() -> userService.findUserById(1));
 
         assertThat(thrown).isInstanceOf(crewMemberNotFoundException.class)
-                .hasMessageContaining("User not found");
+                .hasMessageContaining("Could not find user 1");
         verify(userRepository, times(1)).findById(1);
 
     }

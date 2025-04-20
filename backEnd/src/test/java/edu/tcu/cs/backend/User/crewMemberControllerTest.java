@@ -1,10 +1,14 @@
-package edu.tcu.cs.backend.UserDto;
+package edu.tcu.cs.backend.User;
 
+import edu.tcu.cs.backend.User.dto.UserDto;
 import edu.tcu.cs.backend.System.StatusCode;
-import org.junit.jupiter.api.AfterEach;
+import edu.tcu.cs.backend.System.Exception.ObjectNotFoundException;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -16,10 +20,10 @@ import java.util.List;
 
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doThrow;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-
 
 @SpringBootTest
 @AutoConfigureMockMvc(addFilters = false)
@@ -31,8 +35,10 @@ class crewMemberControllerTest {
     @MockBean
     crewMemberService userService;
 
-
     List<crewMember> users;
+
+    @Value("${api.endpoint.base-url}")
+    String baseUrl;
 
     @BeforeEach
     void setUp() {
@@ -60,35 +66,30 @@ class crewMemberControllerTest {
         users.add(user3);
     }
 
-    @AfterEach
-    void tearDown() {
-
-    }
-
     @Test
     void testFindUserByIdSuccess() throws Exception {
-        //Given
-        given(this.userService.findUserById(1)).willReturn(this.users.get(0));
-        //When
-        this.mockMvc.perform(get("/crewMember/1").accept(MediaType.APPLICATION_JSON))
+        // Given
+        given(this.userService.findUserById(2)).willReturn(this.users.get(1));
+        // When
+        this.mockMvc.perform(get(this.baseUrl+ "/crewMember/2").accept(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.flag").value(true))
                 .andExpect(jsonPath("$.code").value(200))
                 .andExpect(jsonPath("$.message").value("Find Success"))
-                .andExpect(jsonPath("$.data.id").value(1))
-                .andExpect(jsonPath("$.data.firstName").value("John"))
+                .andExpect(jsonPath("$.data.id").value(2))
+                .andExpect(jsonPath("$.data.firstName").value("Jane"))
                 .andExpect(jsonPath("$.data.lastName").value("Doe"));
-
     }
 
     @Test
     void testFindUserByIdNotFound() throws Exception {
-        //Given
+        // Given
         given(this.userService.findUserById(5689)).willThrow(new crewMemberNotFoundException(5689));
-        //When
+        // When
         this.mockMvc.perform(get("/crewMember/5689").accept(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.flag").value(false))
                 .andExpect(jsonPath("$.code").value(404))
                 .andExpect(jsonPath("$.message").value("Could not find user 5689"))
                 .andExpect(jsonPath("$.data").isEmpty());
     }
+
 }
