@@ -1,15 +1,29 @@
 <template>
   <div class="app">
     <nav class="navbar">
+      <router-link to="/home" class="nav-link">Home</router-link>
       <router-link to="/profile/create" class="nav-link">Create Profile</router-link>
       <router-link to="/profiles" class="nav-link">View Profiles</router-link>
       <router-link to="/availability" class="nav-link">Availability</router-link>
       <router-link to="/admin" class="nav-link">Admin Portal</router-link>
       <router-link to="/scheduling" class="nav-link">Scheduling</router-link>
+      <!-- v-if="isAuthenticated" -->
+      <!-- v-if="userRole === 'admin'" -->
     </nav>
     <router-view></router-view>
   </div>
 </template>
+
+<script>
+import { isAuthenticated, getUserRole } from '@/api/auth'
+import { ref, watchEffect } from 'vue'
+
+const userRole = ref('')
+
+watchEffect(() => {
+  userRole.value = getUserRole()
+})
+</script>
 
 <style>
 /* Global styles (not scoped) */
