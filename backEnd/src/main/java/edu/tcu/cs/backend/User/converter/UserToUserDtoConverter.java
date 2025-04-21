@@ -10,7 +10,7 @@ public class UserToUserDtoConverter implements Converter<crewMember, UserDto> {
 
     @Override
     public UserDto convert(crewMember source) {
-        UserDto userDto = new UserDto(source.getId(),
+        final UserDto userDto = new UserDto(source.getId(),
                 source.getFirstName(),
                 source.getLastName(),
                 source.getEmail(),

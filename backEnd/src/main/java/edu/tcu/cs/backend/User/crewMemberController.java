@@ -12,9 +12,11 @@ import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RestController
+@RequestMapping("${api.endpoint.base-url}/crewMember")
 public class crewMemberController {
 
     private final crewMemberService userService;
@@ -31,6 +33,10 @@ public class crewMemberController {
     @GetMapping("/crewMember")
     public Result findAllUsers() {
         List<crewMember> foundUsers = this.userService.findAll();
+
+        List<UserDto> userDtos = foundUsers.stream()
+                .map(userToUserDtoConverter::convert)
+                .collect(Collectors.toList());
         return new Result(true, StatusCode.SUCCESS, "Find Success", foundUsers);
     }
 

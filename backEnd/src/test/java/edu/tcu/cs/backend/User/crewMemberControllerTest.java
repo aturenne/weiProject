@@ -1,5 +1,6 @@
 package edu.tcu.cs.backend.User;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.tcu.cs.backend.User.dto.UserDto;
 import edu.tcu.cs.backend.System.StatusCode;
 import edu.tcu.cs.backend.System.Exception.ObjectNotFoundException;
@@ -31,6 +32,9 @@ class crewMemberControllerTest {
 
     @Autowired
     MockMvc mockMvc;
+
+    @Autowired
+    ObjectMapper objectMapper;
 
     @MockBean
     crewMemberService userService;
@@ -90,6 +94,45 @@ class crewMemberControllerTest {
                 .andExpect(jsonPath("$.code").value(404))
                 .andExpect(jsonPath("$.message").value("Could not find user 5689"))
                 .andExpect(jsonPath("$.data").isEmpty());
+    }
+
+    @Test
+    void testFindAllUsers() throws Exception {
+        // Given
+        given(this.userService.findAll()).willReturn(this.users);
+        // When
+        this.mockMvc.perform(get(this.baseUrl + "/crewMember").accept(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.flag").value(true))
+                .andExpect(jsonPath("$.code").value(200))
+                .andExpect(jsonPath("$.message").value("Find Success"))
+                .andExpect(jsonPath("$.data", Matchers.hasSize(this.users.size())))
+                .andExpect(jsonPath("$.data[0].id").value(1))
+                .andExpect(jsonPath("$.data[0].firstName").value("John"))
+                .andExpect(jsonPath("$.data[0].lastName").value("Doe"));
+    }
+
+    @Test
+    void testAddUser() throws Exception {
+        crewMember user = new crewMember();
+        user.setId(4);
+        user.setFirstName("Jack");
+        user.setLastName("Daniels");
+        user.setEmail("jack@daniels.com");
+        user.setPhoneNumber("1234567890");
+        user.setRole("USER");
+        user.setPositions(List.of("DIRECTOR", "PRODUCER"));
+
+        String json = this.objectMapper.writeValueAsString(user);
+
+        given(this.userService.save(Mockito.any(crewMember.class))).willReturn(user);
+
+        this.mockMvc.perform(post(this.baseUrl + "/crewMember").contentType(MediaType.APPLICATION_JSON).content(json).accept(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.flag").value(true))
+                .andExpect(jsonPath("$.code").value(200))
+                .andExpect(jsonPath("$.message").value("Create Success"))
+                .andExpect(jsonPath("$.data.id").value(4))
+                .andExpect(jsonPath("$.data.firstName").value("Jack"))
+                .andExpect(jsonPath("$.data.lastName").value("Daniels"));
     }
 
 }

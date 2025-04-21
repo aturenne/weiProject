@@ -1,67 +1,42 @@
 package edu.tcu.cs.backend.gameSchedule;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Column;
+import edu.tcu.cs.backend.Games.game;
+import jakarta.persistence.*;
+
+import java.io.Serializable;
+import java.util.List;
 
 @Entity
-public class gameSchedule {
+public class gameSchedule implements Serializable {
 
     @Id
-    private int gameId;
+    private int id;
 
-    private int scheduleId;
+    private String sport;
 
-    private String gameDate;
+    private String season;
 
-    private String venue;
-
-    private String opponent;
-
-    private Boolean isFinalized;
-
-    public gameSchedule() {
+    public int getId() {
+        return id;
     }
 
-    public int getGameId() {
-        return gameId;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setGameId(int gameId) {
-        this.gameId = gameId;
+    public String getSport() {
+        return sport;
     }
 
-    public int getScheduleId() {
-        return scheduleId;
+    public void setSport(String sport) {
+        this.sport = sport;
     }
 
-    public void setScheduleId(int scheduleId) {
-        this.scheduleId = scheduleId;
+    public String getSeason() {
+        return season;
     }
 
-    public String getGameDate() {
-        return gameDate;
-    }
-
-    public void setGameDate(String gameDate) {
-        this.gameDate = gameDate;
-    }
-
-    public String getVenue() {
-        return venue;
-    }
-
-    public void setVenue(String venue) {
-        this.venue = venue;
-    }
-
-    public String getOpponent() {
-        return opponent;
-    }
-
-    public void setOpponent(String opponent) {
-        this.opponent = opponent;
+    public void setSeason(String season) {
+        this.season = season;
     }
 }

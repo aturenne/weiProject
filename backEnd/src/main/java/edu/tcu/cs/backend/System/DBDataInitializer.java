@@ -45,6 +45,7 @@ public class DBDataInitializer implements CommandLineRunner {
         cm3.setRole("USER");
         cm3.setPositions(List.of("DIRECTOR", "PRODUCER"));
 
+
         crewMemberRepository.save(cm1);
         crewMemberRepository.save(cm2);
         crewMemberRepository.save(cm3);
