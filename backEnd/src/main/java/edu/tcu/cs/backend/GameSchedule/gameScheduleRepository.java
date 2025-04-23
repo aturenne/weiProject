@@ -1,4 +1,4 @@
-package edu.tcu.cs.backend.gameSchedule;
+package edu.tcu.cs.backend.GameSchedule;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

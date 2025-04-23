@@ -1,16 +1,14 @@
-package edu.tcu.cs.backend.gameSchedule;
+package edu.tcu.cs.backend.GameSchedule;
 
-import edu.tcu.cs.backend.Games.game;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 public class gameSchedule implements Serializable {
 
     @Id
-    private int id;
+    private Integer id;
 
     private String sport;
 

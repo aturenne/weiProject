@@ -1,9 +1,8 @@
-package edu.tcu.cs.backend.crewList;
+package edu.tcu.cs.backend.CrewList;
 
+import edu.tcu.cs.backend.User.crewMemberNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class crewListService {
@@ -14,9 +13,11 @@ public class crewListService {
         this.crewListRepository = crewListRepository;
     }
 
-    public List<crewList> getAllCrewMembers() {
-        return crewListRepository.findAll();
+    public crewList findCrewListByGameId(int gameId) {
+        return this.crewListRepository.findById(gameId).orElseThrow(()-> new crewMemberNotFoundException(gameId));
+
     }
 
     
 }
+

@@ -1,4 +1,4 @@
-package edu.tcu.cs.backend.gameSchedule;
+package edu.tcu.cs.backend.GameSchedule;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

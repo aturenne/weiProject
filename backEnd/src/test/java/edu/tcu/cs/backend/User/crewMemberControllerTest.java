@@ -53,6 +53,7 @@ class crewMemberControllerTest {
         user1.setFirstName("John");
         user1.setLastName("Doe");
         user1.setEmail("john@doe.com");
+        
         users.add(user1);
 
         crewMember user2 = new crewMember();
@@ -89,7 +90,7 @@ class crewMemberControllerTest {
         // Given
         given(this.userService.findUserById(5689)).willThrow(new crewMemberNotFoundException(5689));
         // When
-        this.mockMvc.perform(get("/crewMember/5689").accept(MediaType.APPLICATION_JSON))
+        this.mockMvc.perform(get(this.baseUrl + "/crewMember/5689").accept(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.flag").value(false))
                 .andExpect(jsonPath("$.code").value(404))
                 .andExpect(jsonPath("$.message").value("Could not find user 5689"))

@@ -1,8 +1,9 @@
-package edu.tcu.cs.backend.crewList;
+package edu.tcu.cs.backend.CrewedUser;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface crewListRepository extends JpaRepository<crewList, Integer> {
+public interface crewedUserRepository extends JpaRepository<crewedUser, Integer> {
 }
+

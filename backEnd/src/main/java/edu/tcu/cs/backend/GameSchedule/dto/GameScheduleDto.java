@@ -1,4 +1,4 @@
-package edu.tcu.cs.backend.gameSchedule.dto;
+package edu.tcu.cs.backend.GameSchedule.dto;
 
 import jakarta.validation.constraints.NotEmpty;
 

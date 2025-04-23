@@ -1,6 +1,5 @@
 package edu.tcu.cs.backend.Games;
 
-import edu.tcu.cs.backend.gameSchedule.gameSchedule;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -9,9 +8,9 @@ import java.io.Serializable;
 public class game implements Serializable {
 
     @Id
-    private int gameId;
+    private Integer gameId;
 
-    private int scheduleId;
+    private Integer scheduleId;
 
     private String gameDate;
 
