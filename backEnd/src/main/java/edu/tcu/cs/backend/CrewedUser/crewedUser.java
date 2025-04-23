@@ -7,10 +7,7 @@ import jakarta.persistence.*;
 @Entity
 public class crewedUser {
     @Id
-    private Integer crewedUserId;
-
     private Integer userId;
-
 
     private String position;
 
@@ -23,7 +20,6 @@ public class crewedUser {
 
     @ManyToOne
     @JoinColumn(name = "game_id", nullable = false)
-    @JsonBackReference
     private crewList crewList;
 
     public crewedUser() {
@@ -38,15 +34,6 @@ public class crewedUser {
         this.crewList = crewList;
     }
 
-
-
-    public Integer getCrewedUserId() {
-        return crewedUserId;
-    }
-
-    public void setCrewedUserId(Integer crewedUserId) {
-        this.crewedUserId = crewedUserId;
-    }
 
     public Integer getUserId() {
         return userId;

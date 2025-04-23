@@ -12,7 +12,6 @@ public class CrewedUserToCrewedUserDtoConverter implements Converter<crewedUser,
     @Override
     public CrewedUserDto convert(crewedUser source) {
         return new CrewedUserDto(
-                source.getCrewedUserId(),
                 source.getUserId(),
                 source.getPosition(),
                 source.getFullName(),

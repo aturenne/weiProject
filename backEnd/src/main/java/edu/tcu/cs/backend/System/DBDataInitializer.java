@@ -1,11 +1,11 @@
 package edu.tcu.cs.backend.System;
-/*
+
 import edu.tcu.cs.backend.CrewList.crewList;
 import edu.tcu.cs.backend.CrewList.crewListRepository;
 import edu.tcu.cs.backend.CrewedUser.crewedUser;
 import edu.tcu.cs.backend.CrewedUser.crewedUserRepository;
 
- */
+
 import edu.tcu.cs.backend.User.crewMember;
 import edu.tcu.cs.backend.User.crewMemberRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -18,15 +18,11 @@ import java.util.List;
 @Component
 public class DBDataInitializer implements CommandLineRunner {
 
+    private final crewListRepository crewListRepository;
+    private final crewedUserRepository crewedUserRepository;
     private final crewMemberRepository crewMemberRepository;
 
-    public DBDataInitializer(crewMemberRepository crewMemberRepository) {
-        this.crewMemberRepository = crewMemberRepository;
-    }
-    //private final crewListRepository crewListRepository;
-   // private final crewedUserRepository crewedUserRepository;
 
-    /*
     public DBDataInitializer(crewMemberRepository crewMemberRepository,
                              crewListRepository crewListRepository,
                              crewedUserRepository crewedUserRepository) {
@@ -35,7 +31,7 @@ public class DBDataInitializer implements CommandLineRunner {
         this.crewedUserRepository = crewedUserRepository;
     }
 
-     */
+
 
     @Override
     @Transactional
@@ -71,7 +67,7 @@ public class DBDataInitializer implements CommandLineRunner {
         crewMemberRepository.save(cm1);
         crewMemberRepository.save(cm2);
         crewMemberRepository.save(cm3);
-/*
+
         // Create crew list with initialized crewedUsers list
         crewList cl1 = new crewList();
         cl1.setGameId(1);
@@ -85,7 +81,6 @@ public class DBDataInitializer implements CommandLineRunner {
 
         // Create crewed users and set up relationships
         crewedUser cu1 = new crewedUser();
-        cu1.setCrewedUserId(1);
         cu1.setUserId(1);
         cu1.setFullName("John Doe");
         cu1.setReportTime("09:00:00");
@@ -94,7 +89,6 @@ public class DBDataInitializer implements CommandLineRunner {
         cu1.setCrewList(cl1);  // Set the relationship
 
         crewedUser cu2 = new crewedUser();
-        cu2.setCrewedUserId(2);
         cu2.setUserId(2);
         cu2.setFullName("Jane Smith");
         cu2.setReportTime("09:30:00");
@@ -103,7 +97,6 @@ public class DBDataInitializer implements CommandLineRunner {
         cu2.setCrewList(cl1);  // Set the relationship
 
         crewedUser cu3 = new crewedUser();
-        cu3.setCrewedUserId(3);
         cu3.setUserId(3);
         cu3.setFullName("Alice Johnson");
         cu3.setReportTime("09:15:00");
@@ -119,6 +112,6 @@ public class DBDataInitializer implements CommandLineRunner {
         // Save the crew list which will cascade to crewed users
         crewListRepository.save(cl1);
 
- */
+
     }
 }

@@ -13,7 +13,6 @@ public class CrewedUserDtoToCrewedUserConverter implements Converter<CrewedUserD
     @Override
     public crewedUser convert(CrewedUserDto source) {
         crewedUser crewedUser = new crewedUser();
-        crewedUser.setCrewedUserId(source.crewedUserId());
         crewedUser.setUserId(source.userId());
 
         crewedUser.setPosition(source.position());

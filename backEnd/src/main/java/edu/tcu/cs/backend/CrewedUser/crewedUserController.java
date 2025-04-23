@@ -17,12 +17,6 @@ public class crewedUserController {
         this.crewedUserService = crewedUserService;
     }
 
-    @GetMapping("/{gameId}")
-    public Result findAllCrewedUsers() {
-        List<crewedUser> foundCrewedUsers = this.crewedUserService.findAll();
-        return new Result(true, StatusCode.SUCCESS, "Find Success", foundCrewedUsers);
-    }
-
 
 }
 

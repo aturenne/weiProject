@@ -12,12 +12,6 @@ import java.util.stream.Collectors;
 @Component
 public class CrewListToCrewListDtoConverter implements Converter<crewList, CrewListDto> {
 
-    private final CrewedUserToCrewedUserDtoConverter crewedUserToCrewedUserDtoConverter;
-
-    public CrewListToCrewListDtoConverter(CrewedUserToCrewedUserDtoConverter crewedUserToCrewedUserDtoConverter) {
-        this.crewedUserToCrewedUserDtoConverter = crewedUserToCrewedUserDtoConverter;
-    }
-
     @Override
     public CrewListDto convert(crewList source) {
         return new CrewListDto(

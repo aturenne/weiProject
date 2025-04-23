@@ -5,7 +5,6 @@ import edu.tcu.cs.backend.CrewList.crewList;
 import jakarta.validation.constraints.NotEmpty;
 
 public record CrewedUserDto(
-        Integer crewedUserId,
         Integer userId,
         String position,
         String fullName,

@@ -4,11 +4,12 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import edu.tcu.cs.backend.CrewedUser.crewedUser;
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class crewList {
+public class crewList implements Serializable {
 
     @Id
     private Integer gameId;
@@ -25,7 +26,6 @@ public class crewList {
 
 
     @OneToMany(mappedBy = "crewList", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
     private List<crewedUser> crewedUsers = new ArrayList<>();
 
     // Default constructor
