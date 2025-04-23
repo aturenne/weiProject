@@ -2,7 +2,7 @@ package edu.tcu.cs.backend.System.Exception;
 
 import edu.tcu.cs.backend.System.Result;
 import edu.tcu.cs.backend.System.StatusCode;
-import edu.tcu.cs.backend.UserDto.crewMemberNotFoundException;
+import edu.tcu.cs.backend.User.crewMemberNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;

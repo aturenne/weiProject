@@ -1,4 +1,4 @@
-package edu.tcu.cs.backend.UserDto;
+package edu.tcu.cs.backend.User;
 
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
@@ -29,11 +29,11 @@ public class crewMember  implements Serializable {
     public crewMember() {
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
