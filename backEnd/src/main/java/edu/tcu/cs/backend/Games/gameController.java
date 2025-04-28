@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("${api.endpoint.base-url}/game")
+@RequestMapping("${api.endpoint.base-url}")
 public class gameController {
 
     private final gameService GamesService;
