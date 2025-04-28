@@ -172,4 +172,36 @@ class crewMemberControllerTest {
                 .andExpect(jsonPath("$.data[1].token").isNotEmpty());
     }
 
+    @Test
+    void testDeleteUserByIdSuccess() throws Exception {
+        // Given
+        int userId = 1;
+        doNothing().when(userService).deleteUserById(userId);
+
+        // When
+        this.mockMvc.perform(delete(this.baseUrl + "/crewMember/" + userId)
+                        .accept(MediaType.APPLICATION_JSON))
+                // Then
+                .andExpect(jsonPath("$.flag").value(true))
+                .andExpect(jsonPath("$.code").value(200))
+                .andExpect(jsonPath("$.message").value("Delete Success"))
+                .andExpect(jsonPath("$.data").isEmpty());
+    }
+
+    @Test
+    void testDeleteUserByIdNotFound() throws Exception {
+        // Given
+        int userId = 999;
+        doThrow(new crewMemberNotFoundException(userId)).when(userService).deleteUserById(userId);
+
+        // When
+        this.mockMvc.perform(delete(this.baseUrl + "/crewMember/" + userId)
+                        .accept(MediaType.APPLICATION_JSON))
+                // Then
+                .andExpect(jsonPath("$.flag").value(false))
+                .andExpect(jsonPath("$.code").value(404))
+                .andExpect(jsonPath("$.message").value("Could not find user " + userId))
+                .andExpect(jsonPath("$.data").isEmpty());
+    }
+
 }

@@ -23,6 +23,13 @@ public class crewMemberService {
         return this.userRepository.findAll();
     }
 
+    public void deleteUserById(int userId) {
+        if (!userRepository.existsById(userId)) {
+            throw new crewMemberNotFoundException(userId);
+        }
+        userRepository.deleteById(userId);
+    }
+
     public crewMember save(crewMember newCrewMember) {
         return this.userRepository.save(newCrewMember);
     }
