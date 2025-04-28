@@ -72,7 +72,10 @@ public class crewMemberController {
         return new Result(true, StatusCode.SUCCESS, "Invitations generated successfully", invites);
     }
 
-
-
+    @DeleteMapping("/crewMember/{id}")
+    public Result deleteUserById(@PathVariable int id) {
+        userService.deleteUserById(id);
+        return new Result(true, StatusCode.SUCCESS, "Delete Success", null);
+    }
 
 }

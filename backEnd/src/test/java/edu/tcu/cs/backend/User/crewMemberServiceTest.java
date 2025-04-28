@@ -18,8 +18,7 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class crewMemberServiceTest {
@@ -124,5 +123,36 @@ class crewMemberServiceTest {
         assertThat(returnedUser.getRole()).isEqualTo(newUser.getRole());
         assertThat(returnedUser.getPositions()).isEqualTo(newUser.getPositions());
         verify(userRepository, times(1)).save(newUser);
+    }
+
+    @Test
+    void testDeleteUserById() {
+        // Given
+        int userId = 1;
+        given(userRepository.existsById(userId)).willReturn(true);
+        doNothing().when(userRepository).deleteById(userId);
+
+        // When
+        userService.deleteUserById(userId);
+
+        // Then
+        verify(userRepository, times(1)).existsById(userId);
+        verify(userRepository, times(1)).deleteById(userId);
+    }
+
+    @Test
+    void testDeleteUserByIdNotFound() {
+        // Given
+        int userId = 999;
+        given(userRepository.existsById(userId)).willReturn(false);
+
+        // When
+        Throwable thrown = catchThrowable(() -> userService.deleteUserById(userId));
+
+        // Then
+        assertThat(thrown).isInstanceOf(crewMemberNotFoundException.class)
+                .hasMessageContaining("Could not find user " + userId);
+        verify(userRepository, times(1)).existsById(userId);
+        verify(userRepository, times(0)).deleteById(userId);
     }
 }
