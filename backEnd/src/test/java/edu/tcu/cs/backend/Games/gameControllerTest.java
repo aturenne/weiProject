@@ -85,13 +85,12 @@ class gameControllerTest {
     void testFindAllGames() throws Exception {
         given(this.gameService.findAll()).willReturn(this.games);
 
-        this.mockMvc.perform(get(this.baseUrl + "/games").accept(MediaType.APPLICATION_JSON))
+        this.mockMvc.perform(get(this.baseUrl + "/gameSchedule/games").accept(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.flag").value(true))
                 .andExpect(jsonPath("$.code").value(200))
                 .andExpect(jsonPath("$.message").value("Find Success"))
                 .andExpect(jsonPath("$.data", Matchers.hasSize(this.games.size())))
-                .andExpect(jsonPath("$.data[0].id").value(1))
-                .andExpect(jsonPath("$.data[0].firstName").value("John"))
-                .andExpect(jsonPath("$.data[0].lastName").value("Doe"));
+                .andExpect(jsonPath("$.data[0].gameId").value(1));
+
     }
 }

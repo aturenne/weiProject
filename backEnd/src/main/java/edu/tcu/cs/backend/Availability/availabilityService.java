@@ -14,6 +14,22 @@ public class availabilityService {
         this.availabilityRepository = availabilityRepository;
     }
 
+    public availability updateAvailability(availability updatedAvailability) {
+        availability existingAvailability = availabilityRepository.findById(updatedAvailability.getUserId())
+                .orElseThrow(() -> new ObjectNotFoundException("Availability", "userId=" + updatedAvailability.getUserId()));
+
+        // Update relevant fields
+        existingAvailability.setAvailability(updatedAvailability.getAvailability());
+
+        // Add other fields as needed
+
+        // Save the updated entity
+        return availabilityRepository.save(existingAvailability);
+    }
+
+
+
+
     public availability getAvailabilityByUserIdAndScheduleId(int userId, int scheduleId) {
         return availabilityRepository.findByUserIdAndGameId(userId, scheduleId)
                 .orElseThrow(() -> new ObjectNotFoundException("Availability", "userId=" + userId + ", scheduleId=" + scheduleId));

@@ -10,6 +10,6 @@ public record CrewedUserDto(
         String fullName,
         String reportTime,
         String reportLocation
-        // Note: no reference back to CrewListDto
+
 ) {}
 
