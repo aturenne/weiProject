@@ -136,4 +136,40 @@ class crewMemberControllerTest {
                 .andExpect(jsonPath("$.data.lastName").value("Daniels"));
     }
 
+    @Test
+    void testInviteCrewMembers() throws Exception {
+        // Given
+        List<Integer> crewMemberIds = List.of(1, 2);
+        crewMember user1 = new crewMember();
+        user1.setId(1);
+        user1.setFirstName("John");
+        user1.setLastName("Doe");
+        user1.setEmail("john@doe.com");
+
+        crewMember user2 = new crewMember();
+        user2.setId(2);
+        user2.setFirstName("Jane");
+        user2.setLastName("Doe");
+        user2.setEmail("jane@doe.com");
+
+        given(this.userService.findUserById(1)).willReturn(user1);
+        given(this.userService.findUserById(2)).willReturn(user2);
+
+        // When
+        this.mockMvc.perform(post(this.baseUrl + "/invite")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(this.objectMapper.writeValueAsString(crewMemberIds))
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.flag").value(true))
+                .andExpect(jsonPath("$.code").value(200))
+                .andExpect(jsonPath("$.message").value("Invitations generated successfully"))
+                .andExpect(jsonPath("$.data", Matchers.hasSize(2)))
+                .andExpect(jsonPath("$.data[0].crewMemberId").value("1"))
+                .andExpect(jsonPath("$.data[0].email").value("john@doe.com"))
+                .andExpect(jsonPath("$.data[0].token").isNotEmpty())
+                .andExpect(jsonPath("$.data[1].crewMemberId").value("2"))
+                .andExpect(jsonPath("$.data[1].email").value("jane@doe.com"))
+                .andExpect(jsonPath("$.data[1].token").isNotEmpty());
+    }
+
 }

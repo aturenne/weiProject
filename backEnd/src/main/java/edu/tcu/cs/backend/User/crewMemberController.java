@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -51,6 +51,25 @@ public class crewMemberController {
     public Result addUser(@RequestBody @Valid crewMember newCrewMember) {
         crewMember createdUser = this.userService.save(newCrewMember);
         return new Result(true, StatusCode.SUCCESS, "Create Success", createdUser);
+    }
+
+    @PostMapping("/invite")
+    public Result inviteCrewMembers(@RequestBody List<Integer> crewMemberIds) {
+        List<Map<String, String>> invites = new ArrayList<>();
+
+        for (Integer id : crewMemberIds) {
+            crewMember member = userService.findUserById(id);
+            String token = UUID.randomUUID().toString(); // Generate a one-time token
+
+            Map<String, String> invite = new HashMap<>();
+            invite.put("crewMemberId", String.valueOf(member.getId()));
+            invite.put("email", member.getEmail());
+            invite.put("token", token);
+
+            invites.add(invite);
+        }
+
+        return new Result(true, StatusCode.SUCCESS, "Invitations generated successfully", invites);
     }
 
 
